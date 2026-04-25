@@ -1,306 +1,271 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2709
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEKTRON Border IA | IA de Borde Soberana para México</title>
+  <meta name="description" content="Infraestructura de inteligencia artificial 100% local. Método de Calibración Contextual (MCC) para soberanía cognitiva, seguridad nacional y cumplimiento regulatorio. DOI: 10.5281/zenodo.18492979">
+  <meta property="og:title" content="TEKTRON Border IA · Soberanía Cognitiva para México">
+  <meta property="og:description" content="Protocolo técnico que obliga a cualquier algoritmo a validarse contra normas, clima y saberes mexicanos antes de decidir.">
+  <meta property="og:type" content="website">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="es-MX">\
-<head>\
-  <meta charset="UTF-8">\
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-  <title>TEKTRON Border IA | IA de Borde Soberana para M\'e9xico</title>\
-  <meta name="description" content="Infraestructura de inteligencia artificial 100% local. M\'e9todo de Calibraci\'f3n Contextual (MCC) para soberan\'eda cognitiva, seguridad nacional y cumplimiento regulatorio. DOI: 10.5281/zenodo.18492979">\
-  <meta property="og:title" content="TEKTRON Border IA \'b7 Soberan\'eda Cognitiva para M\'e9xico">\
-  <meta property="og:description" content="Protocolo t\'e9cnico que obliga a cualquier algoritmo a validarse contra normas, clima y saberes mexicanos antes de decidir.">\
-  <meta property="og:type" content="website">\
-  \
-  <!-- Fuentes profesionales -->\
-  <link rel="preconnect" href="https://fonts.googleapis.com">\
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">\
-\
-  <style>\
-    :root \{\
-      --bg: #08090c;\
-      --surface: #0f1116;\
-      --border: #1a1d26;\
-      --text: #e6e7eb;\
-      --text-muted: #8a8d96;\
-      --green: #00e59b;\
-      --pink: #e4007c; /* Rosa mexicano profundo */\
-      --font-main: 'Inter', system-ui, -apple-system, sans-serif;\
-      --font-mono: 'JetBrains Mono', monospace;\
-    \}\
-\
-    * \{ box-sizing: border-box; margin: 0; padding: 0; \}\
-    html \{ scroll-behavior: smooth; \}\
-    body \{\
-      background: var(--bg);\
-      color: var(--text);\
-      font-family: var(--font-main);\
-      line-height: 1.65;\
-      overflow-x: hidden;\
-    \}\
-\
-    /* Grid sutil cyberpunk */\
-    body::before \{\
-      content: ""; position: fixed; inset: 0;\
-      background: linear-gradient(rgba(0, 229, 155, 0.04) 1px, transparent 1px),\
-                  linear-gradient(90deg, rgba(0, 229, 155, 0.04) 1px, transparent 1px);\
-      background-size: 48px 48px;\
-      pointer-events: none; z-index: -1;\
-    \}\
-\
-    .container \{ max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; \}\
-    a \{ color: var(--green); text-decoration: none; transition: 0.2s; \}\
-    a:hover \{ color: var(--pink); \}\
-\
-    /* Header */\
-    header \{ padding: 5rem 0 3rem; border-bottom: 1px solid var(--border); \}\
-    .tag \{\
-      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px;\
-      color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem;\
-    \}\
-    .tag::before \{ content: ""; width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px var(--green); \}\
-    h1 \{\
-      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05;\
-      margin: 1rem 0 0.5rem; letter-spacing: -0.02em;\
-    \}\
-    h1 span \{ color: var(--pink); \}\
-    .subtitle \{\
-      font-size: 1.25rem; color: var(--text-muted); max-width: 680px; margin-bottom: 2rem;\
-    \}\
-    .quote \{\
-      border-left: 3px solid var(--pink); padding-left: 1.5rem; font-style: italic;\
-      color: var(--text); font-size: 1.1rem; margin: 2rem 0;\
-    \}\
-\
-    /* Sections */\
-    section \{ padding: 4.5rem 0; border-bottom: 1px solid var(--border); \}\
-    h2 \{\
-      font-size: 1.8rem; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 0.75rem;\
-      font-weight: 600; letter-spacing: -0.01em;\
-    \}\
-    h2::before \{\
-      content: ""; width: 6px; height: 6px; background: var(--pink); border-radius: 50%;\
-      box-shadow: 0 0 8px var(--pink);\
-    \}\
-    .grid \{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; \}\
-    .card \{\
-      background: var(--surface); border: 1px solid var(--border); padding: 2rem;\
-      border-radius: 4px; transition: transform 0.2s, border-color 0.2s;\
-    \}\
-    .card:hover \{ border-color: var(--green); transform: translateY(-2px); \}\
-    .card h3 \{\
-      color: var(--green); font-family: var(--font-mono); font-size: 0.95rem;\
-      margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;\
-    \}\
-\
-    /* Table */\
-    .metrics \{\
-      width: 100%; border-collapse: collapse; margin-top: 1.5rem;\
-      font-family: var(--font-mono); font-size: 0.9rem;\
-    \}\
-    .metrics th, .metrics td \{\
-      padding: 1rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border);\
-    \}\
-    .metrics th \{\
-      color: var(--text-muted); font-weight: 400; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;\
-    \}\
-    .ok \{ color: var(--green); font-weight: 600; \}\
-    .risk \{ color: var(--pink); font-weight: 600; \}\
-\
-    /* Buttons */\
-    .actions \{ display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; \}\
-    .btn \{\
-      display: inline-flex; align-items: center; gap: 0.5rem;\
-      background: transparent; color: var(--green); border: 1px solid var(--green);\
-      padding: 0.85rem 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;\
-      text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; cursor: pointer;\
-    \}\
-    .btn:hover \{ background: var(--green); color: var(--bg); \}\
-    .btn.primary \{ background: var(--pink); border-color: var(--pink); color: #fff; \}\
-    .btn.primary:hover \{ background: transparent; color: var(--pink); \}\
-\
-    /* Footer */\
-    footer \{ padding: 3.5rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; \}\
-    .license \{\
-      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);\
-      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);\
-    \}\
-\
-    /* Animaciones suaves */\
-    .fade \{ opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; \}\
-    .fade.visible \{ opacity: 1; transform: translateY(0); \}\
-\
-    @media (max-width: 768px) \{\
-      h1 \{ font-size: 2.5rem; \}\
-      .actions \{ flex-direction: column; \}\
-      .btn \{ width: 100%; justify-content: center; \}\
-    \}\
-  </style>\
-</head>\
-<body>\
-\
-  <header>\
-    <div class="container">\
-      <div class="tag">INFRAESTRUCTURA COGNITIVA \'b7 M\'c9XICO</div>\
-      <h1>TEKTRON <span>BORDER IA</span></h1>\
-      <p class="subtitle">Inteligencia artificial de borde 100% local. Calibrada con normas, territorio y epistemolog\'edas mexicanas. Sin dependencia de nube. Sin extracci\'f3n de datos.</p>\
-      <div class="quote">"La tecnolog\'eda debe rendirse ante la realidad del territorio, y no al rev\'e9s."</div>\
-      <div class="actions">\
-        <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">Ver DOI &amp; Respaldo CLACSO</a>\
-        <a href="#metricas" class="btn primary">M\'e9tricas de Soberan\'eda</a>\
-      </div>\
-    </div>\
-  </header>\
-\
-  <main>\
-    <section id="diagnostico">\
-      <div class="container fade">\
-        <h2>EL RIESGO DE LA COLONIA REGULATORIA</h2>\
-        <div class="grid">\
-          <div class="card">\
-            <h3>77% Operaci\'f3n Extranjera</h3>\
-            <p>La mayor\'eda de los sistemas de IA que operan en M\'e9xico procesan datos bajo jurisdicci\'f3n extranjera. Decisiones cr\'edticas sobre energ\'eda, log\'edstica y datos ciudadanos dependen de plataformas que el Estado no controla.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Despojo Automatizado</h3>\
-            <p>Algoritmos importados ignoran variables sociot\'e9cnicas mexicanas: propiedad ejidal, contextos geogr\'e1ficos extremos, pericia t\'e9cnica local. Invalidan la realidad por no ser "legible" para modelos extranjeros.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Dependencia Gramatical</h3>\
-            <p>P\'e9rdida progresiva de la capacidad soberana para definir par\'e1metros de desarrollo fuera de los est\'e1ndares de Silicon Valley y sus l\'f3gicas extractivas.</p>\
-          </div>\
-        </div>\
-      </div>\
-    </section>\
-\
-    <section id="solucion">\
-      <div class="container fade">\
-        <h2>EL M\'c9TODO DE CALIBRACI\'d3N CONTEXTUAL (MCC)</h2>\
-        <p style="margin-bottom: 2rem; max-width: 800px;">Protocolo de auditor\'eda e integridad algor\'edtmica que funciona como middleware soberano. Antes de que cualquier modelo responda, el MCC inyecta el marco normativo, territorial y cultural mexicano. Garantiza decisiones contextualmente v\'e1lidas y legalmente defendibles.</p>\
-        <div class="grid">\
-          <div class="card">\
-            <h3>Capa A \'b7 Privacidad</h3>\
-            <p>Bus de microservicios en contenedores locales. Telemetr\'eda y datos sensibles de la administraci\'f3n p\'fablica protegidos contra captura por Big Tech. Procesamiento 100% local.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Capa B \'b7 Interfaz Soberana</h3>\
-            <p>Protocolo Matrix descentralizado (c\'f3digo abierto). Consola donde el funcionario o t\'e9cnico calibra el juicio del algoritmo antes de ejecutar decisiones cr\'edticas.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Capa C \'b7 L\'f3gica MCC</h3>\
-            <p>Middleware que intercepta flujos de inferencia. Inyecta variables de contexto encarnado (clima, historial de activos, normativa NOM/UL) y genera trazabilidad SHA-256 auditable.</p>\
-          </div>\
-        </div>\
-      </div>\
-    </section>\
-\
-    <section id="metricas">\
-      <div class="container fade">\
-        <h2>M\'c9TRICAS DE SOBERAN\'cdA</h2>\
-        <table class="metrics">\
-          <thead>\
-            <tr>\
-              <th>Indicador</th>\
-              <th>Cloud T\'edpico</th>\
-              <th>TEKTRON MCC</th>\
-            </tr>\
-          </thead>\
-          <tbody>\
-            <tr>\
-              <td>Soberan\'eda de Decisi\'f3n</td>\
-              <td class="risk">0.23 (77% externo)</td>\
-              <td class="ok">0.97 (97% local)</td>\
-            </tr>\
-            <tr>\
-              <td>Reciprocidad Energ\'e9tica</td>\
-              <td class="risk">Extractiva</td>\
-              <td class="ok">10.9x (&gt;5x garantizado)</td>\
-            </tr>\
-            <tr>\
-              <td>ROI Estimado</td>\
-              <td>\'97</td>\
-              <td class="ok">14 meses</td>\
-            </tr>\
-            <tr>\
-              <td>Ahorro Suscripciones Cloud/a\'f1o</td>\
-              <td>\'97</td>\
-              <td class="ok">USD $35k\'9660k</td>\
-            </tr>\
-            <tr>\
-              <td>Paro Industrial Evitado</td>\
-              <td>\'97</td>\
-              <td class="ok">USD $50k\'96150k/evento</td>\
-            </tr>\
-          </tbody>\
-        </table>\
-      </div>\
-    </section>\
-\
-    <section id="beneficios">\
-      <div class="container fade">\
-        <h2>BENEFICIOS ESTRAT\'c9GICOS PARA EL ESTADO</h2>\
-        <div class="grid">\
-          <div class="card">\
-            <h3>Autonom\'eda T\'e9cnica</h3>\
-            <p>Independencia de est\'e1ndares impuestos por plataformas extranjeras y volatilidad de acuerdos comerciales. Uso de modelos globales calibrados localmente.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Seguridad Nacional</h3>\
-            <p>Ilegibilidad estrat\'e9gica de datos cr\'edticos. Procesamiento en gabinete UL508A sin dependencia de nubes extractivas. Principio de Redundancia Inversa: la IA asiste, nunca es punto \'fanico de falla.</p>\
-          </div>\
-          <div class="card">\
-            <h3>Cumplimiento Regulatorio</h3>\
-            <p>Alineaci\'f3n directa con la Ley Federal de IA en proceso y mandato de autonom\'eda tecnol\'f3gica. Historial de decisiones con validez jur\'eddica para auditor\'edas ISO 27001 y peritajes.</p>\
-          </div>\
-        </div>\
-      </div>\
-    </section>\
-\
-    <section id="documentacion">\
-      <div class="container fade">\
-        <h2>DOCUMENTACI\'d3N P\'daBLICA</h2>\
-        <p style="margin-bottom: 2rem;">Todo el conocimiento t\'e9cnico, protocolos y licencias \'e9ticas est\'e1n registrados bajo DOI y disponibles para revisi\'f3n, adopci\'f3n o auditor\'eda ciudadana.</p>\
-        <div class="actions">\
-          <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">\uc0\u55357 \u56516  DOI \'b7 Registro Zenodo</a>\
-          <a href="FICHA TECNICA MCC TEKTRON 2026.pdf" class="btn">\uc0\u55357 \u56615  Ficha T\'e9cnica</a>\
-          <a href="DICTAMEN TECNICO INTEGRIDAD ALGORITMICA 2026.pdf" class="btn">\uc0\u9878 \u65039  Dictamen Oficial</a>\
-        </div>\
-        <div style="margin-top: 3rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px;">\
-          <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">\
-            <span style="color: var(--pink); font-weight: 500;">Contacto institucional:</span><br>\
-            <a href="mailto:soberania-cognitiva@disroot.org">soberania-cognitiva@disroot.org</a><br>\
-            Desarrollado desde el territorio. Sin financiamiento corporativo. Respaldo CLACSO.\
-          </p>\
-        </div>\
-      </div>\
-    </section>\
-  </main>\
-\
-  <footer>\
-    <div class="container">\
-      <p>\'a9 2026 FronterIA-Lab \'b7 Consejo Latinoamericano de Ciencias Sociales (CLACSO)</p>\
-      <div class="license">\
-        LICENCIAMIENTO \'c9TICO Y SOBERANO: CC BY-SA 4.0 + GPLv3+ (Capa T\'e9cnica) + Adendo de Reciprocidad Comunal.<br>\
-        Prohibido uso para vigilancia masiva, extractivismo acelerado o ethics washing. Jurisdicci\'f3n preferente: Acuerdo de Escaz\'fa.\
-      </div>\
-    </div>\
-  </footer>\
-\
-  <script>\
-    // Intersection Observer para animaciones suaves al hacer scroll\
-    const observer = new IntersectionObserver((entries) => \{\
-      entries.forEach(entry => \{\
-        if (entry.isIntersecting) \{\
-          entry.target.classList.add('visible');\
-        \}\
-      \});\
-    \}, \{ threshold: 0.1 \});\
-\
-    document.querySelectorAll('.fade').forEach(el => observer.observe(el));\
-  </script>\
-</body>\
-</html>}
+  <style>
+    :root {
+      --bg: #08090c;
+      --surface: #0f1116;
+      --border: #1a1d26;
+      --text: #e6e7eb;
+      --text-muted: #8a8d96;
+      --green: #00e59b;
+      --pink: #e4007c;
+      --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0;
+      background: linear-gradient(rgba(0, 229, 155, 0.04) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0, 229, 155, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none; z-index: -1;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    a { color: var(--green); text-decoration: none; transition: 0.2s; }
+    a:hover { color: var(--pink); }
+    header { padding: 5rem 0 3rem; border-bottom: 1px solid var(--border); }
+    .tag {
+      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px;
+      color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tag::before { content: ""; width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px var(--green); }
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05;
+      margin: 1rem 0 0.5rem; letter-spacing: -0.02em;
+    }
+    h1 span { color: var(--pink); }
+    .subtitle {
+      font-size: 1.25rem; color: var(--text-muted); max-width: 680px; margin-bottom: 2rem;
+    }
+    .quote {
+      border-left: 3px solid var(--pink); padding-left: 1.5rem; font-style: italic;
+      color: var(--text); font-size: 1.1rem; margin: 2rem 0;
+    }
+    section { padding: 4.5rem 0; border-bottom: 1px solid var(--border); }
+    h2 {
+      font-size: 1.8rem; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 0.75rem;
+      font-weight: 600; letter-spacing: -0.01em;
+    }
+    h2::before {
+      content: ""; width: 6px; height: 6px; background: var(--pink); border-radius: 50%;
+      box-shadow: 0 0 8px var(--pink);
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2rem;
+      border-radius: 4px; transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .card h3 {
+      color: var(--green); font-family: var(--font-mono); font-size: 0.95rem;
+      margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .metrics {
+      width: 100%; border-collapse: collapse; margin-top: 1.5rem;
+      font-family: var(--font-mono); font-size: 0.9rem;
+    }
+    .metrics th, .metrics td {
+      padding: 1rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .metrics th {
+      color: var(--text-muted); font-weight: 400; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+    }
+    .ok { color: var(--green); font-weight: 600; }
+    .risk { color: var(--pink); font-weight: 600; }
+    .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      padding: 0.85rem 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; cursor: pointer;
+    }
+    .btn:hover { background: var(--green); color: var(--bg); }
+    .btn.primary { background: var(--pink); border-color: var(--pink); color: #fff; }
+    .btn.primary:hover { background: transparent; color: var(--pink); }
+    footer { padding: 3.5rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    .license {
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+    }
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="tag">INFRAESTRUCTURA COGNITIVA · MÉXICO</div>
+      <h1>TEKTRON <span>BORDER IA</span></h1>
+      <p class="subtitle">Inteligencia artificial de borde 100% local. Calibrada con normas, territorio y epistemologías mexicanas. Sin dependencia de nube. Sin extracción de datos.</p>
+      <div class="quote">"La tecnología debe rendirse ante la realidad del territorio, y no al revés."</div>
+      <div class="actions">
+        <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">Ver DOI y Respaldo CLACSO</a>
+        <a href="#metricas" class="btn primary">Métricas de Soberanía</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="diagnostico">
+      <div class="container fade">
+        <h2>EL RIESGO DE LA COLONIA REGULATORIA</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>77% Operación Extranjera</h3>
+            <p>La mayoría de los sistemas de IA que operan en México procesan datos bajo jurisdicción extranjera. Decisiones críticas sobre energía, logística y datos ciudadanos dependen de plataformas que el Estado no controla.</p>
+          </div>
+          <div class="card">
+            <h3>Despojo Automatizado</h3>
+            <p>Algoritmos importados ignoran variables sociotécnicas mexicanas: propiedad ejidal, contextos geográficos extremos, pericia técnica local. Invalidan la realidad por no ser "legible" para modelos extranjeros.</p>
+          </div>
+          <div class="card">
+            <h3>Dependencia Gramatical</h3>
+            <p>Pérdida progresiva de la capacidad soberana para definir parámetros de desarrollo fuera de los estándares de Silicon Valley y sus lógicas extractivas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="solucion">
+      <div class="container fade">
+        <h2>EL MÉTODO DE CALIBRACIÓN CONTEXTUAL (MCC)</h2>
+        <p style="margin-bottom: 2rem; max-width: 800px;">Protocolo de auditoría e integridad algorítmica que funciona como middleware soberano. Antes de que cualquier modelo responda, el MCC inyecta el marco normativo, territorial y cultural mexicano. Garantiza decisiones contextualmente válidas y legalmente defendibles.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Capa A · Privacidad</h3>
+            <p>Bus de microservicios en contenedores locales. Telemetría y datos sensibles de la administración pública protegidos contra captura por Big Tech. Procesamiento 100% local.</p>
+          </div>
+          <div class="card">
+            <h3>Capa B · Interfaz Soberana</h3>
+            <p>Protocolo Matrix descentralizado (código abierto). Consola donde el funcionario o técnico calibra el juicio del algoritmo antes de ejecutar decisiones críticas.</p>
+          </div>
+          <div class="card">
+            <h3>Capa C · Lógica MCC</h3>
+            <p>Middleware que intercepta flujos de inferencia. Inyecta variables de contexto encarnado (clima, historial de activos, normativa NOM/UL) y genera trazabilidad SHA-256 auditable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="metricas">
+      <div class="container fade">
+        <h2>MÉTRICAS DE SOBERANÍA</h2>
+        <table class="metrics">
+          <thead>
+            <tr>
+              <th>Indicador</th>
+              <th>Cloud Típico</th>
+              <th>TEKTRON MCC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Soberanía de Decisión</td>
+              <td class="risk">0.23 (77% externo)</td>
+              <td class="ok">0.97 (97% local)</td>
+            </tr>
+            <tr>
+              <td>Reciprocidad Energética</td>
+              <td class="risk">Extractiva</td>
+              <td class="ok">10.9x (&gt;5x garantizado)</td>
+            </tr>
+            <tr>
+              <td>ROI Estimado</td>
+              <td>—</td>
+              <td class="ok">14 meses</td>
+            </tr>
+            <tr>
+              <td>Ahorro Suscripciones Cloud/año</td>
+              <td>—</td>
+              <td class="ok">USD $35k–60k</td>
+            </tr>
+            <tr>
+              <td>Paro Industrial Evitado</td>
+              <td>—</td>
+              <td class="ok">USD $50k–150k/evento</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section id="beneficios">
+      <div class="container fade">
+        <h2>BENEFICIOS ESTRATÉGICOS PARA EL ESTADO</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Autonomía Técnica</h3>
+            <p>Independencia de estándares impuestos por plataformas extranjeras y volatilidad de acuerdos comerciales. Uso de modelos globales calibrados localmente.</p>
+          </div>
+          <div class="card">
+            <h3>Seguridad Nacional</h3>
+            <p>Ilegibilidad estratégica de datos críticos. Procesamiento en gabinete UL508A sin dependencia de nubes extractivas. Principio de Redundancia Inversa: la IA asiste, nunca es punto único de falla.</p>
+          </div>
+          <div class="card">
+            <h3>Cumplimiento Regulatorio</h3>
+            <p>Alineación directa con la Ley Federal de IA en proceso y mandato de autonomía tecnológica. Historial de decisiones con validez jurídica para auditorías ISO 27001 y peritajes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="documentacion">
+      <div class="container fade">
+        <h2>DOCUMENTACIÓN PÚBLICA</h2>
+        <p style="margin-bottom: 2rem;">Todo el conocimiento técnico, protocolos y licencias éticas están registrados bajo DOI y disponibles para revisión, adopción o auditoría ciudadana.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">📄 DOI · Registro Zenodo</a>
+          <a href="FICHA_TECNICA_MCC_TEKTRON_2026.pdf" class="btn">🔧 Ficha Técnica</a>
+          <a href="DICTAMEN_TECNICO_INTEGRIDAD_ALGORITMICA_2026.pdf" class="btn">⚖️ Dictamen Oficial</a>
+        </div>
+        <div style="margin-top: 3rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px;">
+          <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">
+            <span style="color: var(--pink); font-weight: 500;">Contacto institucional:</span><br>
+            <a href="mailto:soberania-cognitiva@disroot.org">soberania-cognitiva@disroot.org</a><br>
+            Desarrollado desde el territorio. Sin financiamiento corporativo. Respaldo CLACSO.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>© 2026 FronterIA-Lab · Consejo Latinoamericano de Ciencias Sociales (CLACSO)</p>
+      <div class="license">
+        LICENCIAMIENTO ÉTICO Y SOBERANO: CC BY-SA 4.0 + GPLv3+ (Capa Técnica) + Adendo de Reciprocidad Comunal.<br>
+        Prohibido uso para vigilancia masiva, extractivismo acelerado o ethics washing. Jurisdicción preferente: Acuerdo de Escazú.
+      </div>
+    </div>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
