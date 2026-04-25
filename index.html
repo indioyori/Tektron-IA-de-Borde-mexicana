@@ -1,922 +1,306 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FronterIA-Lab · Dolores Méndez Valdez</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cyan-neon: #00f3ff;
-    --magenta-neon: #ff00ff;
-    --purple-neon: #bc13fe;
-    --orange-neon: #ff6b35;
-    --jade-neon: #39ff14;
-    --negro: #050505;
-    --grid-color: rgba(0, 243, 255, 0.03);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--negro);
-    color: #e0e0e0;
-    font-family: 'Rajdhani', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  /* GRID CYBERPUNK DE FONDO */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: 
-      linear-gradient(var(--grid-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* SCANLINES */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.15) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    pointer-events: none;
-    z-index: 9999;
-    animation: scanline 8s linear infinite;
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(10px); }
-  }
-
-  /* GLITCH EFFECT */
-  .glitch {
-    position: relative;
-    animation: glitch-skew 1s infinite linear alternate-reverse;
-  }
-
-  .glitch::before,
-  .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--magenta-neon);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-
-  .glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--cyan-neon);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 2.5s infinite linear alternate-reverse;
-  }
-
-  @keyframes glitch-anim {
-    0% { clip: rect(31px, 9999px, 94px, 0); }
-    20% { clip: rect(70px, 9999px, 99px, 0); }
-    40% { clip: rect(12px, 9999px, 6px, 0); }
-    60% { clip: rect(85px, 9999px, 40px, 0); }
-    80% { clip: rect(45px, 9999px, 71px, 0); }
-    100% { clip: rect(62px, 9999px, 23px, 0); }
-  }
-
-  @keyframes glitch-anim2 {
-    0% { clip: rect(65px, 9999px, 99px, 0); }
-    20% { clip: rect(12px, 9999px, 45px, 0); }
-    40% { clip: rect(78px, 9999px, 12px, 0); }
-    60% { clip: rect(23px, 9999px, 67px, 0); }
-    80% { clip: rect(91px, 9999px, 34px, 0); }
-    100% { clip: rect(5px, 9999px, 87px, 0); }
-  }
-
-  @keyframes glitch-skew {
-    0% { transform: skew(0deg); }
-    10% { transform: skew(-2deg); }
-    20% { transform: skew(2deg); }
-    30% { transform: skew(0deg); }
-    100% { transform: skew(0deg); }
-  }
-
-  /* NEON GLOW */
-  .neon-text {
-    text-shadow: 
-      0 0 10px currentColor,
-      0 0 20px currentColor,
-      0 0 40px currentColor;
-  }
-
-  .neon-border {
-    box-shadow: 
-      0 0 5px currentColor,
-      inset 0 0 5px currentColor;
-  }
-
-  /* HEADER */
-  header {
-    position: relative;
-    z-index: 1;
-    padding: 100px 60px 80px;
-    border-bottom: 2px solid var(--cyan-neon);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 40px;
-    background: linear-gradient(180deg, rgba(0,243,255,0.05) 0%, transparent 100%);
-  }
-
-  .marca {
-    font-family: 'Orbitron', monospace;
-    font-size: 12px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--cyan-neon);
-    margin-bottom: 25px;
-    opacity: 0;
-    animation: aparecer 0.8s ease forwards 0.2s;
-    text-shadow: 0 0 10px var(--cyan-neon);
-  }
-
-  h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--cyan-neon);
-    opacity: 0;
-    animation: aparecer 0.8s ease forwards 0.4s;
-    text-transform: uppercase;
-  }
-
-  h1 em {
-    font-style: normal;
-    color: var(--magenta-neon);
-    display: block;
-    font-size: 0.6em;
-    letter-spacing: 0.1em;
-    margin-top: 10px;
-  }
-
-  .tagline {
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--purple-neon);
-    text-transform: uppercase;
-    max-width: 300px;
-    text-align: right;
-    opacity: 0;
-    animation: aparecer 0.8s ease forwards 0.6s;
-    border: 1px solid var(--purple-neon);
-    padding: 15px 20px;
-    background: rgba(188, 19, 254, 0.05);
-  }
-
-  /* INTRO */
-  .intro {
-    position: relative;
-    z-index: 1;
-    padding: 80px 60px;
-    max-width: 900px;
-    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
-    opacity: 0;
-    animation: aparecer 0.8s ease forwards 0.7s;
-    background: linear-gradient(90deg, rgba(0,243,255,0.03) 0%, transparent 100%);
-  }
-
-  .intro p {
-    font-size: 1.3rem;
-    color: rgba(224, 224, 224, 0.9);
-    margin-bottom: 1.3em;
-    font-weight: 300;
-  }
-
-  .intro p:last-child { margin-bottom: 0; }
-
-  .intro strong {
-    color: var(--cyan-neon);
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-  }
-
-  /* SECCIÓN */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 100px 60px;
-    border-bottom: 1px solid rgba(0, 243, 255, 0.15);
-  }
-
-  .seccion-label {
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    color: var(--orange-neon);
-    margin-bottom: 60px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    text-shadow: 0 0 10px var(--orange-neon);
-  }
-
-  .seccion-label::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, var(--orange-neon), transparent);
-    max-width: 300px;
-    box-shadow: 0 0 10px var(--orange-neon);
-  }
-
-  /* SERVICIOS */
-  .servicios-grid {
-    display: grid;
-    gap: 3px;
-  }
-
-  .servicio {
-    background: rgba(10, 10, 10, 0.8);
-    padding: 60px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: default;
-    border: 1px solid rgba(0, 243, 255, 0.1);
-  }
-
-  .servicio::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 0;
-    background: linear-gradient(180deg, var(--cyan-neon), var(--magenta-neon));
-    transition: height 0.4s ease;
-    box-shadow: 0 0 20px var(--cyan-neon);
-  }
-
-  .servicio::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,243,255,0.05) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .servicio:hover { 
-    background: rgba(20, 20, 20, 0.95);
-    border-color: var(--cyan-neon);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
-  }
-  
-  .servicio:hover::before { height: 100%; }
-  .servicio:hover::after { opacity: 1; }
-
-  .servicio-numero {
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    color: var(--magenta-neon);
-    margin-bottom: 25px;
-    text-shadow: 0 0 10px var(--magenta-neon);
-  }
-
-  .servicio-titulo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 15px;
-    letter-spacing: 0.05em;
-    color: var(--cyan-neon);
-    text-transform: uppercase;
-  }
-
-  .servicio-subtitulo {
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--jade-neon);
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    text-shadow: 0 0 8px var(--jade-neon);
-  }
-
-  .servicio-desc {
-    color: rgba(224, 224, 224, 0.8);
-    font-size: 1.05rem;
-    max-width: 650px;
-    margin-bottom: 35px;
-    line-height: 1.7;
-  }
-
-  .servicio-incluye {
-    margin-bottom: 40px;
-  }
-
-  .servicio-incluye h4 {
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--purple-neon);
-    margin-bottom: 18px;
-    text-shadow: 0 0 8px var(--purple-neon);
-  }
-
-  .servicio-incluye ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .servicio-incluye li {
-    font-size: 1rem;
-    color: rgba(224, 224, 224, 0.75);
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-  }
-
-  .servicio-incluye li::before {
-    content: '▸';
-    color: var(--cyan-neon);
-    flex-shrink: 0;
-    margin-top: 2px;
-    text-shadow: 0 0 8px var(--cyan-neon);
-  }
-
-  .precio-bloque {
-    display: flex;
-    align-items: baseline;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding-top: 25px;
-    border-top: 1px solid rgba(255, 107, 53, 0.3);
-  }
-
-  .precio {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--orange-neon);
-    letter-spacing: 0.02em;
-    text-shadow: 0 0 15px var(--orange-neon);
-  }
-
-  .precio-nota {
-    font-family: 'Orbitron', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    color: rgba(224, 224, 224, 0.4);
-    text-transform: uppercase;
-  }
-
-  /* PARA QUIÉN */
-  .clientes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 3px;
-  }
-
-  .cliente-card {
-    background: rgba(10, 10, 10, 0.7);
-    padding: 40px;
-    transition: all 0.3s;
-    border: 1px solid rgba(188, 19, 254, 0.1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cliente-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--magenta-neon), var(--cyan-neon));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-
-  .cliente-card:hover { 
-    background: rgba(20, 20, 20, 0.9);
-    border-color: var(--magenta-neon);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(188, 19, 254, 0.2);
-  }
-
-  .cliente-card:hover::before {
-    transform: scaleX(1);
-  }
-
-  .cliente-icon {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px var(--cyan-neon));
-  }
-
-  .cliente-tipo {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    margin-bottom: 12px;
-    color: var(--cyan-neon);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .cliente-desc {
-    font-size: 0.95rem;
-    color: rgba(224, 224, 224, 0.65);
-    line-height: 1.7;
-  }
-
-  /* MARCO */
-  .marco-bloque {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-  }
-
-  .marco-item {
-    background: rgba(10, 10, 10, 0.7);
-    padding: 45px;
-    border: 1px solid rgba(0, 243, 255, 0.1);
-    transition: all 0.3s;
-  }
-
-  .marco-item:hover {
-    border-color: var(--cyan-neon);
-    box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
-  }
-
-  .marco-item h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: var(--cyan-neon);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .marco-item p {
-    font-size: 1rem;
-    color: rgba(224, 224, 224, 0.7);
-    line-height: 1.8;
-  }
-
-  /* PRINCIPIOS */
-  .principios {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    margin-top: 50px;
-  }
-
-  .principio {
-    background: rgba(10, 10, 10, 0.7);
-    padding: 45px;
-    border-top: 3px solid transparent;
-    transition: all 0.3s;
-    position: relative;
-  }
-
-  .principio:hover { 
-    border-top-color: var(--jade-neon);
-    background: rgba(20, 20, 20, 0.9);
-    box-shadow: 0 0 30px rgba(57, 255, 20, 0.1);
-  }
-
-  .principio-num {
-    font-family: 'Orbitron', monospace;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: rgba(0, 243, 255, 0.2);
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-  }
-
-  .principio h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--jade-neon);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .principio p {
-    font-size: 0.95rem;
-    color: rgba(224, 224, 224, 0.65);
-    line-height: 1.7;
-  }
-
-  /* CONTACTO */
-  .contacto-bloque {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .contacto-texto h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-    margin-bottom: 25px;
-    color: var(--cyan-neon);
-    text-transform: uppercase;
-  }
-
-  .contacto-texto h2 em {
-    font-style: normal;
-    color: var(--magenta-neon);
-    display: block;
-    font-size: 0.7em;
-    margin-top: 10px;
-  }
-
-  .contacto-texto p {
-    color: rgba(224, 224, 224, 0.7);
-    max-width: 500px;
-    font-size: 1.1rem;
-    line-height: 1.7;
-  }
-
-  .contacto-accion {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 280px;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 20px 40px;
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    font-weight: 700;
-  }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .btn-primario {
-    background: var(--cyan-neon);
-    color: var(--negro);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-  }
-
-  .btn-primario:hover {
-    background: var(--magenta-neon);
-    box-shadow: 0 0 40px rgba(255, 0, 255, 0.7);
-    transform: translateY(-3px);
-  }
-
-  .btn-primario:hover::before {
-    opacity: 1;
-  }
-
-  .btn-secundario {
-    background: transparent;
-    color: var(--cyan-neon);
-    border: 2px solid var(--cyan-neon);
-    box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.1);
-  }
-
-  .btn-secundario:hover {
-    background: rgba(0, 243, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
-    color: var(--negro);
-  }
-
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    padding: 50px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    border-top: 2px solid var(--purple-neon);
-    background: linear-gradient(0deg, rgba(188,19,254,0.05) 0%, transparent 100%);
-  }
-
-  .footer-marca {
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    color: rgba(0, 243, 255, 0.5);
-    text-transform: uppercase;
-  }
-
-  .footer-nota {
-    font-family: 'Orbitron', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    color: rgba(188, 19, 254, 0.4);
-    text-transform: uppercase;
-    text-align: right;
-    line-height: 1.8;
-  }
-
-  /* ANIMACIONES */
-  @keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ELEMENTOS DECORATIVOS CYBERPUNK */
-  .corner {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--cyan-neon);
-  }
-
-  .corner-tl { top: 15px; left: 15px; border-right: 0; border-bottom: 0; }
-  .corner-tr { top: 15px; right: 15px; border-left: 0; border-bottom: 0; }
-  .corner-bl { bottom: 15px; left: 15px; border-right: 0; border-top: 0; }
-  .corner-br { bottom: 15px; right: 15px; border-left: 0; border-top: 0; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    header, .intro, section { padding: 60px 30px; }
-    header { grid-template-columns: 1fr; }
-    .tagline { text-align: left; }
-    .marco-bloque { grid-template-columns: 1fr; }
-    .principios { grid-template-columns: 1fr; }
-    .contacto-bloque { grid-template-columns: 1fr; gap: 40px; }
-    .servicio { padding: 40px 30px; }
-    h1 { font-size: 2.5rem; }
-  }
-
-  /* GLITCH RANDOM */
-  .glitch-random {
-    animation: glitch-random 3s infinite;
-  }
-
-  @keyframes glitch-random {
-    0%, 90%, 100% { opacity: 1; }
-    92% { opacity: 0.8; transform: translateX(-2px); }
-    94% { opacity: 1; transform: translateX(2px); }
-    96% { opacity: 0.9; transform: translateX(-1px); }
-    98% { opacity: 1; }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-bl"></div>
-  <div>
-    <div class="marca glitch">// FronterIA-Lab · Servicios Profesionales</div>
-    <h1 class="glitch" data-text="IA SOBERANA.">IA soberana.<br><em>Sin pedir permiso.</em></h1>
-  </div>
-  <div class="tagline neon-border">Soberanía cognitiva como acto político total</div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-br"></div>
-</header>
-
-<div class="intro">
-  <p>Soy <strong>Dolores Méndez Valdez</strong>, investigadora y arquitecta de sistemas de IA soberana. Desarrollo marcos teóricos y soluciones técnicas para organizaciones que quieren usar inteligencia artificial <strong>sin entregar sus datos, su autonomía ni su identidad</strong> a plataformas del Norte Global.</p>
-  <p>Mi trabajo cruza lo que casi nadie cruza: filosofía decolonial, ingeniería de borde y práctica política. El resultado no es consultoría genérica de IA. Es algo que no existía antes.</p>
-</div>
-
-<!-- SERVICIOS -->
-<section>
-  <div class="seccion-label">[Servicios]</div>
-
-  <div class="servicios-grid">
-
-    <!-- SERVICIO 1 -->
-    <div class="servicio">
-      <div class="servicio-numero">[01]</div>
-      <div class="servicio-titulo">Implementación de IA Local Soberana</div>
-      <div class="servicio-subtitulo">TEKTRON Border IA como servicio</div>
-      <p class="servicio-desc">Instalo y configuro un sistema de inteligencia artificial que opera 100% en el hardware de tu organización. Sin telemetría. Sin suscripción a servidores de OpenAI, Google ni Microsoft. Tus datos no salen de tu red. Tu corpus documental se convierte en la memoria del sistema.</p>
-      <div class="servicio-incluye">
-        <h4>// Incluye</h4>
-        <ul>
-          <li>Diagnóstico de necesidades y selección de hardware</li>
-          <li>Instalación de Ollama, Open WebUI y modelos locales</li>
-          <li>Configuración del RAG con corpus documental propio</li>
-          <li>System prompt personalizado para el contexto de la organización</li>
-          <li>Capacitación del equipo (4–8 horas)</li>
-          <li>Documentación técnica completa + soporte 30 días</li>
-        </ul>
-      </div>
-      <div class="precio-bloque">
-        <span class="precio">$45,000 – $120,000 MXN</span>
-        <span class="precio-nota">según complejidad · hardware no incluido</span>
-      </div>
-    </div>
-
-    <!-- SERVICIO 2 -->
-    <div class="servicio">
-      <div class="servicio-numero">[02]</div>
-      <div class="servicio-titulo">Talleres de Soberanía Cognitiva</div>
-      <div class="servicio-subtitulo">El Método de Calibración Contextual (MCC)</div>
-      <p class="servicio-desc">Tu organización ya usa IA. La pregunta es si sabe cómo usarla sin que le use a ella. El MCC es un protocolo práctico para interactuar con sistemas de inteligencia artificial sin ceder autoridad epistémica, sin aceptar el Olvido Estructural, y sin convertir la eficiencia en criterio de verdad.</p>
-      <div class="servicio-incluye">
-        <h4>// Formatos disponibles</h4>
-        <ul>
-          <li>Taller intensivo de un día (8 horas) — presencial o en línea</li>
-          <li>Taller de medio día (4 horas) — introducción al MCC</li>
-          <li>Diplomado de 4 sesiones (comunidades o equipos)</li>
-          <li>Conferencia magistral (90 minutos) + sesión de preguntas</li>
-        </ul>
-      </div>
-      <div class="precio-bloque">
-        <span class="precio">$18,000 – $55,000 MXN</span>
-        <span class="precio-nota">según formato y tamaño del grupo</span>
-      </div>
-    </div>
-
-    <!-- SERVICIO 3 -->
-    <div class="servicio">
-      <div class="servicio-numero">[03]</div>
-      <div class="servicio-titulo">Auditoría de Integridad Algorítmica</div>
-      <div class="servicio-subtitulo">Diagnóstico estratégico de IA en organizaciones</div>
-      <p class="servicio-desc">¿Tu organización usa IA de forma ética y soberana? ¿Sabes qué datos procesan las herramientas que ya tienes instaladas? ¿A qué jurisdicción pertenecen? ¿Qué hace imposible pensar el sistema que usas? Mapeo completo de riesgos cognitivos, epistémicos y de soberanía de datos, con criterios de decisión —no soluciones impuestas— para que tu equipo elija.</p>
-      <div class="servicio-incluye">
-        <h4>// Incluye</h4>
-        <ul>
-          <li>Mapeo de herramientas de IA en uso + análisis de flujo de datos</li>
-          <li>Identificación de olvidos estructurales específicos al contexto</li>
-          <li>Evaluación de riesgo para comunidades usuarias o beneficiarias</li>
-          <li>Dictamen técnico con marcos de criterios de decisión</li>
-          <li>Sesión de presentación con preguntas (2 horas)</li>
-        </ul>
-      </div>
-      <div class="precio-bloque">
-        <span class="precio">$55,000 – $150,000 MXN</span>
-        <span class="precio-nota">según tamaño de la organización · 3–6 semanas</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PARA QUIÉN -->
-<section>
-  <div class="seccion-label">[¿Para quién]</div>
-  <div class="clientes-grid">
-    <div class="cliente-card">
-      <div class="cliente-icon">⚖️</div>
-      <div class="cliente-tipo">OSCs y organizaciones de derechos humanos</div>
-      <p class="cliente-desc">Que usan IA en su trabajo cotidiano y necesitan un marco crítico para hacerlo sin comprometer la seguridad de sus comunidades ni su soberanía de datos.</p>
-    </div>
-    <div class="cliente-card">
-      <div class="cliente-icon">🎙️</div>
-      <div class="cliente-tipo">Medios independientes y periodismo</div>
-      <p class="cliente-desc">Que quieren incorporar IA a sus flujos sin depender de plataformas corporativas que pueden censurar, monitorear o interrumpir su trabajo.</p>
-    </div>
-    <div class="cliente-card">
-      <div class="cliente-icon">🏛️</div>
-      <div class="cliente-tipo">Universidades y centros de investigación</div>
-      <p class="cliente-desc">Que buscan marcos teóricos y capacidad técnica para estudiar, enseñar e implementar IA desde una perspectiva decolonial y situada.</p>
-    </div>
-    <div class="cliente-card">
-      <div class="cliente-icon">🌐</div>
-      <div class="cliente-tipo">Cooperación internacional</div>
-      <p class="cliente-desc">ONU, BID, fundaciones y agencias de desarrollo que financian proyectos con comunidades y necesitan que la tecnología no reproduzca las mismas asimetrías que buscan resolver.</p>
-    </div>
-    <div class="cliente-card">
-      <div class="cliente-icon">🏘️</div>
-      <div class="cliente-tipo">Comunidades y cooperativas</div>
-      <p class="cliente-desc">Que quieren tecnología que regenere en lugar de extraer. Que la IA sea herramienta de autonomía, no nuevo vector de dependencia.</p>
-    </div>
-    <div class="cliente-card">
-      <div class="cliente-icon">🏛️</div>
-      <div class="cliente-tipo">Gobiernos municipales</div>
-      <p class="cliente-desc">Con agenda de autonomía tecnológica que buscan implementar IA sin comprometer los datos de sus ciudadanos ni crear dependencia de proveedores externos.</p>
-    </div>
-  </div>
-</section>
-
-<!-- MARCO -->
-<section>
-  <div class="seccion-label">[Por qué es diferente]</div>
-  <div class="marco-bloque">
-    <div class="marco-item">
-      <h3>Marco teórico propio</h3>
-      <p>10 papers publicados y un libro que articulan la teoría del despojo cognitivo-territorial desde el siglo XVI hasta el algoritmo de recomendación de YouTube. No es consultoría genérica de IA. Es una teoría unificada de la soberanía cognitiva que ningún otro consultor en América Latina tiene.</p>
-    </div>
-    <div class="marco-item">
-      <h3>Capacidad técnica real</h3>
-      <p>Diseño e implemento sistemas de IA de borde que funcionan sin conexión a internet, sin telemetría, sin dependencia de la nube. Hardware Jetson Orin, Ollama, Open WebUI, RAG nativo con corpus soberano. No es teoría: es ingeniería operativa.</p>
-    </div>
-    <div class="marco-item">
-      <h3>Intersección que no existe en otro lugar</h3>
-      <p>Los estudios decoloniales no llegan a la capa técnica. Los estudios críticos de IA no conectan con la filosofía náhuatl ni con la termodinámica política. Los estudios de neuroderechos no tienen dimensión decolonial. Este trabajo está en la intersección de los tres campos.</p>
-    </div>
-    <div class="marco-item">
-      <h3>Red institucional</h3>
-      <p>CLACSO, FronterIA-Lab, y una red activa en el circuito de derechos digitales latinoamericano. El trabajo tiene trayectoria verificable, papers con DOI y una práctica que se puede auditar.</p>
-    </div>
-  </div>
-
-  <div class="principios">
-    <div class="principio">
-      <div class="principio-num">01</div>
-      <h3>Sin soluciones únicas</h3>
-      <p>Nunca entrego una solución como si fuera objetiva. Si existe tensión entre eficiencia y protocolo local, la presento, no la resuelvo. Tu organización decide.</p>
-    </div>
-    <div class="principio">
-      <div class="principio-num">02</div>
-      <h3>Sin telemetría</h3>
-      <p>Los sistemas que implemento no reportan datos a ningún servidor externo. Tus conversaciones con la IA se quedan en tu red. Punto.</p>
-    </div>
-    <div class="principio">
-      <div class="principio-num">03</div>
-      <h3>Transferencia real de capacidad</h3>
-      <p>El objetivo no es que me necesites para siempre. Es que cuando termine el proyecto, tu equipo pueda operar, mantener y expandir el sistema de forma autónoma.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section>
-  <div class="seccion-label">[Contacto]</div>
-  <div class="contacto-bloque">
-    <div class="contacto-texto">
-      <h2 class="glitch" data-text="¿LISTA PARA DEJAR DE PEDIR PERMISO?">¿Tu organización está lista para<br><em>dejar de pedir permiso?</em></h2>
-      <p>Escribeme para una conversación inicial sin costo. En 30 minutos puedo decirte si lo que necesitas está dentro de lo que hago, y qué camino tiene más sentido para tu contexto específico.</p>
-    </div>
-    <div class="contacto-accion">
-      <a href="mailto:dolores@tektron.local" class="btn btn-primario glitch-random">[ Escribir ahora ]</a>
-      <a href="#" class="btn btn-secundario">[ Ver publicaciones ]</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-marca">FronterIA-Lab · Dolores Méndez Valdez · México · 2026</div>
-  <div class="footer-nota">Soberanía cognitiva<br>desde el territorio</div>
-</footer>
-
-<script>
-  // Efecto glitch aleatorio en elementos
-  setInterval(() => {
-    const elementos = document.querySelectorAll('.servicio-titulo, .cliente-tipo');
-    const random = elementos[Math.floor(Math.random() * elementos.length)];
-    random.classList.add('glitch-random');
-    setTimeout(() => {
-      random.classList.remove('glitch-random');
-    }, 300);
-  }, 5000);
-</script>
-
-</body>
-</html>
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="es-MX">\
+<head>\
+  <meta charset="UTF-8">\
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+  <title>TEKTRON Border IA | IA de Borde Soberana para M\'e9xico</title>\
+  <meta name="description" content="Infraestructura de inteligencia artificial 100% local. M\'e9todo de Calibraci\'f3n Contextual (MCC) para soberan\'eda cognitiva, seguridad nacional y cumplimiento regulatorio. DOI: 10.5281/zenodo.18492979">\
+  <meta property="og:title" content="TEKTRON Border IA \'b7 Soberan\'eda Cognitiva para M\'e9xico">\
+  <meta property="og:description" content="Protocolo t\'e9cnico que obliga a cualquier algoritmo a validarse contra normas, clima y saberes mexicanos antes de decidir.">\
+  <meta property="og:type" content="website">\
+  \
+  <!-- Fuentes profesionales -->\
+  <link rel="preconnect" href="https://fonts.googleapis.com">\
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">\
+\
+  <style>\
+    :root \{\
+      --bg: #08090c;\
+      --surface: #0f1116;\
+      --border: #1a1d26;\
+      --text: #e6e7eb;\
+      --text-muted: #8a8d96;\
+      --green: #00e59b;\
+      --pink: #e4007c; /* Rosa mexicano profundo */\
+      --font-main: 'Inter', system-ui, -apple-system, sans-serif;\
+      --font-mono: 'JetBrains Mono', monospace;\
+    \}\
+\
+    * \{ box-sizing: border-box; margin: 0; padding: 0; \}\
+    html \{ scroll-behavior: smooth; \}\
+    body \{\
+      background: var(--bg);\
+      color: var(--text);\
+      font-family: var(--font-main);\
+      line-height: 1.65;\
+      overflow-x: hidden;\
+    \}\
+\
+    /* Grid sutil cyberpunk */\
+    body::before \{\
+      content: ""; position: fixed; inset: 0;\
+      background: linear-gradient(rgba(0, 229, 155, 0.04) 1px, transparent 1px),\
+                  linear-gradient(90deg, rgba(0, 229, 155, 0.04) 1px, transparent 1px);\
+      background-size: 48px 48px;\
+      pointer-events: none; z-index: -1;\
+    \}\
+\
+    .container \{ max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; \}\
+    a \{ color: var(--green); text-decoration: none; transition: 0.2s; \}\
+    a:hover \{ color: var(--pink); \}\
+\
+    /* Header */\
+    header \{ padding: 5rem 0 3rem; border-bottom: 1px solid var(--border); \}\
+    .tag \{\
+      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px;\
+      color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem;\
+    \}\
+    .tag::before \{ content: ""; width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px var(--green); \}\
+    h1 \{\
+      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05;\
+      margin: 1rem 0 0.5rem; letter-spacing: -0.02em;\
+    \}\
+    h1 span \{ color: var(--pink); \}\
+    .subtitle \{\
+      font-size: 1.25rem; color: var(--text-muted); max-width: 680px; margin-bottom: 2rem;\
+    \}\
+    .quote \{\
+      border-left: 3px solid var(--pink); padding-left: 1.5rem; font-style: italic;\
+      color: var(--text); font-size: 1.1rem; margin: 2rem 0;\
+    \}\
+\
+    /* Sections */\
+    section \{ padding: 4.5rem 0; border-bottom: 1px solid var(--border); \}\
+    h2 \{\
+      font-size: 1.8rem; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 0.75rem;\
+      font-weight: 600; letter-spacing: -0.01em;\
+    \}\
+    h2::before \{\
+      content: ""; width: 6px; height: 6px; background: var(--pink); border-radius: 50%;\
+      box-shadow: 0 0 8px var(--pink);\
+    \}\
+    .grid \{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; \}\
+    .card \{\
+      background: var(--surface); border: 1px solid var(--border); padding: 2rem;\
+      border-radius: 4px; transition: transform 0.2s, border-color 0.2s;\
+    \}\
+    .card:hover \{ border-color: var(--green); transform: translateY(-2px); \}\
+    .card h3 \{\
+      color: var(--green); font-family: var(--font-mono); font-size: 0.95rem;\
+      margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;\
+    \}\
+\
+    /* Table */\
+    .metrics \{\
+      width: 100%; border-collapse: collapse; margin-top: 1.5rem;\
+      font-family: var(--font-mono); font-size: 0.9rem;\
+    \}\
+    .metrics th, .metrics td \{\
+      padding: 1rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border);\
+    \}\
+    .metrics th \{\
+      color: var(--text-muted); font-weight: 400; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;\
+    \}\
+    .ok \{ color: var(--green); font-weight: 600; \}\
+    .risk \{ color: var(--pink); font-weight: 600; \}\
+\
+    /* Buttons */\
+    .actions \{ display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; \}\
+    .btn \{\
+      display: inline-flex; align-items: center; gap: 0.5rem;\
+      background: transparent; color: var(--green); border: 1px solid var(--green);\
+      padding: 0.85rem 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;\
+      text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; cursor: pointer;\
+    \}\
+    .btn:hover \{ background: var(--green); color: var(--bg); \}\
+    .btn.primary \{ background: var(--pink); border-color: var(--pink); color: #fff; \}\
+    .btn.primary:hover \{ background: transparent; color: var(--pink); \}\
+\
+    /* Footer */\
+    footer \{ padding: 3.5rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; \}\
+    .license \{\
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);\
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);\
+    \}\
+\
+    /* Animaciones suaves */\
+    .fade \{ opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; \}\
+    .fade.visible \{ opacity: 1; transform: translateY(0); \}\
+\
+    @media (max-width: 768px) \{\
+      h1 \{ font-size: 2.5rem; \}\
+      .actions \{ flex-direction: column; \}\
+      .btn \{ width: 100%; justify-content: center; \}\
+    \}\
+  </style>\
+</head>\
+<body>\
+\
+  <header>\
+    <div class="container">\
+      <div class="tag">INFRAESTRUCTURA COGNITIVA \'b7 M\'c9XICO</div>\
+      <h1>TEKTRON <span>BORDER IA</span></h1>\
+      <p class="subtitle">Inteligencia artificial de borde 100% local. Calibrada con normas, territorio y epistemolog\'edas mexicanas. Sin dependencia de nube. Sin extracci\'f3n de datos.</p>\
+      <div class="quote">"La tecnolog\'eda debe rendirse ante la realidad del territorio, y no al rev\'e9s."</div>\
+      <div class="actions">\
+        <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">Ver DOI &amp; Respaldo CLACSO</a>\
+        <a href="#metricas" class="btn primary">M\'e9tricas de Soberan\'eda</a>\
+      </div>\
+    </div>\
+  </header>\
+\
+  <main>\
+    <section id="diagnostico">\
+      <div class="container fade">\
+        <h2>EL RIESGO DE LA COLONIA REGULATORIA</h2>\
+        <div class="grid">\
+          <div class="card">\
+            <h3>77% Operaci\'f3n Extranjera</h3>\
+            <p>La mayor\'eda de los sistemas de IA que operan en M\'e9xico procesan datos bajo jurisdicci\'f3n extranjera. Decisiones cr\'edticas sobre energ\'eda, log\'edstica y datos ciudadanos dependen de plataformas que el Estado no controla.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Despojo Automatizado</h3>\
+            <p>Algoritmos importados ignoran variables sociot\'e9cnicas mexicanas: propiedad ejidal, contextos geogr\'e1ficos extremos, pericia t\'e9cnica local. Invalidan la realidad por no ser "legible" para modelos extranjeros.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Dependencia Gramatical</h3>\
+            <p>P\'e9rdida progresiva de la capacidad soberana para definir par\'e1metros de desarrollo fuera de los est\'e1ndares de Silicon Valley y sus l\'f3gicas extractivas.</p>\
+          </div>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <section id="solucion">\
+      <div class="container fade">\
+        <h2>EL M\'c9TODO DE CALIBRACI\'d3N CONTEXTUAL (MCC)</h2>\
+        <p style="margin-bottom: 2rem; max-width: 800px;">Protocolo de auditor\'eda e integridad algor\'edtmica que funciona como middleware soberano. Antes de que cualquier modelo responda, el MCC inyecta el marco normativo, territorial y cultural mexicano. Garantiza decisiones contextualmente v\'e1lidas y legalmente defendibles.</p>\
+        <div class="grid">\
+          <div class="card">\
+            <h3>Capa A \'b7 Privacidad</h3>\
+            <p>Bus de microservicios en contenedores locales. Telemetr\'eda y datos sensibles de la administraci\'f3n p\'fablica protegidos contra captura por Big Tech. Procesamiento 100% local.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Capa B \'b7 Interfaz Soberana</h3>\
+            <p>Protocolo Matrix descentralizado (c\'f3digo abierto). Consola donde el funcionario o t\'e9cnico calibra el juicio del algoritmo antes de ejecutar decisiones cr\'edticas.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Capa C \'b7 L\'f3gica MCC</h3>\
+            <p>Middleware que intercepta flujos de inferencia. Inyecta variables de contexto encarnado (clima, historial de activos, normativa NOM/UL) y genera trazabilidad SHA-256 auditable.</p>\
+          </div>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <section id="metricas">\
+      <div class="container fade">\
+        <h2>M\'c9TRICAS DE SOBERAN\'cdA</h2>\
+        <table class="metrics">\
+          <thead>\
+            <tr>\
+              <th>Indicador</th>\
+              <th>Cloud T\'edpico</th>\
+              <th>TEKTRON MCC</th>\
+            </tr>\
+          </thead>\
+          <tbody>\
+            <tr>\
+              <td>Soberan\'eda de Decisi\'f3n</td>\
+              <td class="risk">0.23 (77% externo)</td>\
+              <td class="ok">0.97 (97% local)</td>\
+            </tr>\
+            <tr>\
+              <td>Reciprocidad Energ\'e9tica</td>\
+              <td class="risk">Extractiva</td>\
+              <td class="ok">10.9x (&gt;5x garantizado)</td>\
+            </tr>\
+            <tr>\
+              <td>ROI Estimado</td>\
+              <td>\'97</td>\
+              <td class="ok">14 meses</td>\
+            </tr>\
+            <tr>\
+              <td>Ahorro Suscripciones Cloud/a\'f1o</td>\
+              <td>\'97</td>\
+              <td class="ok">USD $35k\'9660k</td>\
+            </tr>\
+            <tr>\
+              <td>Paro Industrial Evitado</td>\
+              <td>\'97</td>\
+              <td class="ok">USD $50k\'96150k/evento</td>\
+            </tr>\
+          </tbody>\
+        </table>\
+      </div>\
+    </section>\
+\
+    <section id="beneficios">\
+      <div class="container fade">\
+        <h2>BENEFICIOS ESTRAT\'c9GICOS PARA EL ESTADO</h2>\
+        <div class="grid">\
+          <div class="card">\
+            <h3>Autonom\'eda T\'e9cnica</h3>\
+            <p>Independencia de est\'e1ndares impuestos por plataformas extranjeras y volatilidad de acuerdos comerciales. Uso de modelos globales calibrados localmente.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Seguridad Nacional</h3>\
+            <p>Ilegibilidad estrat\'e9gica de datos cr\'edticos. Procesamiento en gabinete UL508A sin dependencia de nubes extractivas. Principio de Redundancia Inversa: la IA asiste, nunca es punto \'fanico de falla.</p>\
+          </div>\
+          <div class="card">\
+            <h3>Cumplimiento Regulatorio</h3>\
+            <p>Alineaci\'f3n directa con la Ley Federal de IA en proceso y mandato de autonom\'eda tecnol\'f3gica. Historial de decisiones con validez jur\'eddica para auditor\'edas ISO 27001 y peritajes.</p>\
+          </div>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <section id="documentacion">\
+      <div class="container fade">\
+        <h2>DOCUMENTACI\'d3N P\'daBLICA</h2>\
+        <p style="margin-bottom: 2rem;">Todo el conocimiento t\'e9cnico, protocolos y licencias \'e9ticas est\'e1n registrados bajo DOI y disponibles para revisi\'f3n, adopci\'f3n o auditor\'eda ciudadana.</p>\
+        <div class="actions">\
+          <a href="https://doi.org/10.5281/zenodo.18492979" target="_blank" class="btn">\uc0\u55357 \u56516  DOI \'b7 Registro Zenodo</a>\
+          <a href="FICHA TECNICA MCC TEKTRON 2026.pdf" class="btn">\uc0\u55357 \u56615  Ficha T\'e9cnica</a>\
+          <a href="DICTAMEN TECNICO INTEGRIDAD ALGORITMICA 2026.pdf" class="btn">\uc0\u9878 \u65039  Dictamen Oficial</a>\
+        </div>\
+        <div style="margin-top: 3rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px;">\
+          <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">\
+            <span style="color: var(--pink); font-weight: 500;">Contacto institucional:</span><br>\
+            <a href="mailto:soberania-cognitiva@disroot.org">soberania-cognitiva@disroot.org</a><br>\
+            Desarrollado desde el territorio. Sin financiamiento corporativo. Respaldo CLACSO.\
+          </p>\
+        </div>\
+      </div>\
+    </section>\
+  </main>\
+\
+  <footer>\
+    <div class="container">\
+      <p>\'a9 2026 FronterIA-Lab \'b7 Consejo Latinoamericano de Ciencias Sociales (CLACSO)</p>\
+      <div class="license">\
+        LICENCIAMIENTO \'c9TICO Y SOBERANO: CC BY-SA 4.0 + GPLv3+ (Capa T\'e9cnica) + Adendo de Reciprocidad Comunal.<br>\
+        Prohibido uso para vigilancia masiva, extractivismo acelerado o ethics washing. Jurisdicci\'f3n preferente: Acuerdo de Escaz\'fa.\
+      </div>\
+    </div>\
+  </footer>\
+\
+  <script>\
+    // Intersection Observer para animaciones suaves al hacer scroll\
+    const observer = new IntersectionObserver((entries) => \{\
+      entries.forEach(entry => \{\
+        if (entry.isIntersecting) \{\
+          entry.target.classList.add('visible');\
+        \}\
+      \});\
+    \}, \{ threshold: 0.1 \});\
+\
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));\
+  </script>\
+</body>\
+</html>}
